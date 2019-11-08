@@ -1,16 +1,17 @@
 import * as b from "bobril";
 import { renderHook, clean, renderHookInsideParent } from "bobril-hook-testing/src/index"
-import { wireUp } from "../src/provider";
+import { createReduxSpace } from "../src/provider";
 import { Action, applyMiddleware, combineReducers, createStore } from "redux";
 import { counter, CounterActionType, CounterShape, counterTwo, StateShape } from "./bindingData";
 
+(window as any).DEBUG = false;
 const bufferMiddleware = arr => _ => next => action => {
     arr.push(action);
     return next(action);
 };
 
 describe("bindings", () => {
-    const {StoreProvider, useDispatch, useSelector} = wireUp<StateShape>();
+    const {StoreProvider, useDispatch, useSelector} = createReduxSpace<StateShape>();
     describe("not valid use", () => {
         it("dispatch throws when not inside Provider context", () => {
             expect(() => renderHook(useDispatch)).toThrow();
@@ -38,7 +39,7 @@ describe("bindings", () => {
                 const {currentValue: {value: dispatch}} = renderHookInsideParent(useDispatch, ProviderComponent);
                 dispatch({type: "type"});
 
-                expect(actionBuffer[0]).toEqual({type: "type"})
+                expect(actionBuffer[0]).toEqual({type: "type"});
             });
         });
 
@@ -83,8 +84,6 @@ describe("bindings", () => {
             });
         });
     });
-
-
     afterEach(() => {
         clean();
     });

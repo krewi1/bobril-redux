@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bobril": "^13.1.1",
-    "bobril-hook-testing": "0.0.6",
+    "bobril": "*",
+    "bobril-hook-testing": "*",
     "redux": "^4.0.4",
     "typescript": "^3.7.2"
   },
