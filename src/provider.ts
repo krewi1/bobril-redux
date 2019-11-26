@@ -29,21 +29,18 @@ export function createReduxSpace<T>() {
     function useSelector<TReturn>(selector: (state: T) => TReturn, eqFnc: (previous: TReturn, current: TReturn) => boolean = referentialEquality) {
         const store = b.useContext(StoreContext).store;
         if (!store) throw new Error("State provider have to be defined");
-        const initialState = b.useMemo(() => selector(store.getState()), []);
-        const [localState, setLocalState] = b.useState(initialState);
-        const currentState = b.useRef(initialState);
+        const stateProp = b.useState(() => selector(store.getState()));
         b.useEffect(() => {
             const handler = () => {
                 const state = selector(store.getState());
-                if (!eqFnc(currentState.current, state)) {
-                    currentState.current = state;
-                    setLocalState(state);
+                if (!eqFnc(stateProp(), state)) {
+                    stateProp(state);
                 }
             };
             return store.subscribe(handler);
         }, []);
 
-        return localState;
+        return stateProp();
     }
     return {
         StoreProvider,
