@@ -2,7 +2,7 @@
   "name": "bobril-redux",
   "version": "1.0.0",
   "description": "",
-  "main": "src/provider.ts",
+  "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,6 +16,7 @@
     "typescript": "^3.7.2"
   },
   "bobril": {
+    "bbVersion": "0.98.0",
     "allowModuleDeepImport": true
   }
 }

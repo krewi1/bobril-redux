@@ -27,7 +27,7 @@
     "resolveJsonModule": true
   },
   "files": [
-    "C:/Users/p.kratochvil/.bbcore/tools/jasmine330.d.ts"
+    "/home/krewi/.bbcore/tools/jasmine330.d.ts"
   ],
   "include": [
     "**/*"

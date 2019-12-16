@@ -1,10 +1,9 @@
 import * as b from "bobril";
 import { renderHook, clean, renderHookInsideParent } from "bobril-hook-testing/src/index"
-import { createReduxSpace } from "../src/provider";
+import { createReduxSpace } from "../src/index";
 import { Action, applyMiddleware, combineReducers, createStore } from "redux";
 import { counter, CounterActionType, CounterShape, counterTwo, StateShape } from "./bindingData";
 
-(window as any).DEBUG = false;
 const bufferMiddleware = arr => _ => next => action => {
     arr.push(action);
     return next(action);
